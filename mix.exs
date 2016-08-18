@@ -4,8 +4,8 @@ defmodule LoggerLogstashBackend.Mixfile do
   def project do
     [app: :logger_logstash_backend,
      name: "logger_logstash_backend",
-     source_url: "https://github.com/marcelog/logger_logstash_backend",
-     version: "2.1.1",
+     source_url: "https://github.com/appcues/logger_logstash_backend",
+     version: "2.1.3",
      elixir: ">= 1.0.0",
      description: description,
      package: package,
@@ -34,10 +34,10 @@ defmodule LoggerLogstashBackend.Mixfile do
   defp package do
     [
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
-      maintainers: ["Marcelo Gornstein"],
+      maintainers: ["Marcelo Gornstein", "pete gamache"],
       licenses: ["Apache 2.0"],
       links: %{
-        "GitHub" => "https://github.com/marcelog/logger_logstash_backend"
+        "GitHub" => "https://github.com/appcues/logger_logstash_backend"
       }
     ]
   end
