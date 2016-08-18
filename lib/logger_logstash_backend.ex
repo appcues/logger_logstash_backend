@@ -44,7 +44,8 @@ defmodule LoggerLogstashBackend do
       port: port,
       type: type,
       metadata: metadata,
-      socket: socket
+      socket: socket,
+      json_lib: json_lib,
     }
   ) do
     fields = md
@@ -54,7 +55,7 @@ defmodule LoggerLogstashBackend do
              |> inspect_pids
 
     ts = Timex.datetime(ts, :local)
-    {:ok, json} = JSX.encode %{
+    {:ok, json} = json_lib.encode %{
       type: type,
       "@timestamp": Timex.format!(ts, "%FT%T%z", :strftime),
       message: to_string(msg),
@@ -73,6 +74,7 @@ defmodule LoggerLogstashBackend do
     type = Keyword.get opts, :type, "elixir"
     host = Keyword.get opts, :host
     port = Keyword.get opts, :port
+    json_lib = Keyword.get opts, :json_lib
     {:ok, socket} = :gen_udp.open 0
     %{
       name: name,
@@ -81,7 +83,8 @@ defmodule LoggerLogstashBackend do
       level: level,
       socket: socket,
       type: type,
-      metadata: metadata
+      metadata: metadata,
+      json_lib: json_lib || JSX,
     }
   end
 
